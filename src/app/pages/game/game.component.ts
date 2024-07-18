@@ -1,5 +1,3 @@
-// game.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../services/categories.service';
@@ -47,7 +45,7 @@ export class GameComponent implements OnInit {
   }
 
   toggleOptions() {
-    this.isOptionsPopupOpen = !this.isOptionsPopupOpen; // Update this line
+    this.isOptionsPopupOpen = !this.isOptionsPopupOpen;
   }
 
   loadGame() {
@@ -85,7 +83,7 @@ export class GameComponent implements OnInit {
 
   resumeGame() {
     this.isPopupOpen = false;
-    this.isOptionsPopupOpen = false; // Close options popup if it's open
+    this.isOptionsPopupOpen = false;
   }
 
   exitGame() {
@@ -96,7 +94,7 @@ export class GameComponent implements OnInit {
   restartGame() {
     this.life = 8;
     this.isPopupOpen = false;
-    this.isOptionsPopupOpen = false; // Close options popup if it's open
+    this.isOptionsPopupOpen = false;
     this.guessedLetters.clear();
 
     const randomItem =
