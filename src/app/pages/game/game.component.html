@@ -1,0 +1,163 @@
+<div class="h-full max-sm:py-2 text-white relative">
+  <div class="container mx-auto py-10 max-sm:py-2 h-full">
+    <div class="header w-full flex items-center gap-10 max-sm:gap-5 justify-between">
+      <div
+        class="flex gap-10 items-center max-sm:gap-4"
+        (click)="toggleOptions()"
+      >
+        <button
+          class="menu-btn h-24 w-24 max-sm:h-16 max-sm:w-16 rounded-full flex justify-center items-center"
+        >
+          <div
+            class="menu-icon rounded-full grid place-content-center p-2 shadow-2xl z-10"
+          >
+            <img
+              class="icon-img h-full w-full max-sm:h-full max-sm:w-full"
+              src="/assets/images/icon-menu.svg"
+              alt="Menu"
+            />
+          </div>
+        </button>
+        <h1
+          *ngIf="activeGame"
+          class="game-title font-bold text-white text-5xl max-sm:text-3xl tracking-wide"
+        >
+          {{ activeGame.name }}
+        </h1>
+      </div>
+
+      <div class="status-bar flex gap-5 max-sm:gap-3 w-[30vw] max-sm:w-[35vw] items-center">
+        <div class="progress-bar h-6 bg-white w-[80%] rounded-full flex items-center p-2">
+          <div
+            class="progress h-4 bg-blue-1 rounded-full"
+            [ngStyle]="{
+              width: progressWidth + '%'
+            }"
+          ></div>
+        </div>
+        <img class="heart-icon w-8 h-8" src="/assets/images/icon-heart.svg" alt="Heart" />
+      </div>
+    </div>
+    <div class="game-container w-full flex flex-col justify-center items-center mt-10 max-md:mt-16 max-sm:mt-10 h-[70vh]">
+      <div class="word-display w-full flex justify-center items-center">
+        <div class="letters-container flex w-full max-sm:w-full p-2">
+          <div class="letters-grid w-full grid grid-cols-8 max-md:grid-cols-6 gap-5 gap-y-5 place-items-center place-content-center">
+            <div
+              *ngFor="let letter of displayedWord"
+              [ngClass]="{
+                'opacity-50': letter === ''
+              }"
+              class="letter w-20 h-14 max-md:w-16 max-md:h-12 max-sm:w-12 max-sm:h-12 bg-blue-2 rounded-2xl grid place-content-center"
+            >
+              <p class="letter-text text-5xl max-md:text-4xl max-sm:text-2xl">
+                {{ letter }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="keyboard w-full max-sm:w-full flex justify-center items-center mt-24 max-mt-10 max-sm:mt-8">
+        <div class="keyboard-container w-full p-2">
+          <div class="keyboard-grid grid grid-cols-8 max-md:grid-cols-6 gap-5 max-md:gap-3 px-2 max-sm:px-0 place-items-center place-content-center">
+            <div
+              *ngFor="let letter of alphabet"
+              (click)="handleLetterClick(letter)"
+              [ngClass]="{
+                'opacity-15': guessedLetters.has(letter)
+              }"
+              class="key w-20 h-14 max-md:w-16 max-md:h-12 max-sm:w-12 max-sm:h-12 bg-white hover:bg-blue-2 text-blue-1 hover:text-white rounded-2xl grid place-content-center cursor-pointer"
+            >
+              <p class="key-text text-5xl max-md:text-4xl max-sm:text-2xl">
+                {{ letter }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="popup-overlay w-full h-full flex items-center justify-center absolute top-0 left-0 bg-black bg-opacity-40 z-10"
+    [ngClass]="{
+      'block': isPopupOpen,
+      'hidden': !isPopupOpen
+    }"
+  >
+    <div class="popup w-[28rem] h-[24rem] max-sm:w-[20rem] rounded-[2rem] linear-blue relative">
+      <img
+        class="result-img -mt-20 mx-auto max-sm:w-[80%] max-sm:-mt-20 w-48 h-32"
+        [ngClass]="{
+          'block': life === 0,
+          'hidden': life > 0
+        }"
+        src="/assets/images/icon-loose.svg"
+        alt="Lose"
+      />
+      <img
+        class="result-img -mt-20 mx-auto w-48 h-32"
+        [ngClass]="{
+          'block': isCompleted && life > 0,
+          'hidden': !isCompleted || life <= 0
+        }"
+        src="/assets/images/icon-win.svg"
+        alt="Win"
+      />
+      <img
+        class="result-img -mt-20 mx-auto w-48 h-32"
+        [ngClass]="{
+          'block': !isCompleted && life > 0,
+          'hidden': isCompleted || life <= 0
+        }"
+        src="/assets/images/icon-pause.svg"
+        alt="Pause"
+      />
+      <div class="popup-buttons mt-10 flex flex-col items-center justify-center gap-6">
+        <button
+          (click)="restartGame()"
+          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full bg-blue-2 shadow-lg uppercase btn-shadow"
+          [ngClass]="{
+            'block': isCompleted,
+            'hidden': !isCompleted
+          }"
+        >
+          <div class="transition ease-in-out duration-300 rounded-full">
+            Play Again!
+          </div>
+        </button>
+
+        <button
+          (click)="resumeGame()"
+          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full bg-blue-2 shadow-lg uppercase btn-shadow"
+          [ngClass]="{
+            'block': life > 0 && !isCompleted,
+            'hidden': life <= 0 || isCompleted
+          }"
+        >
+          <div class="transition ease-in-out duration-300 rounded-full">
+            Continue
+          </div>
+        </button>
+
+        <button
+          (click)="selectNewCategory()"
+          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full bg-blue-2 shadow-lg uppercase btn-shadow"
+        >
+          <div class="transition ease-in-out duration-300 rounded-full">
+            New Category
+          </div>
+        </button>
+
+        <button
+          (click)="exitGame()"
+          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full linear-pinky shadow-lg uppercase btn-quick-shadow"
+        >
+          <div class="transition ease-in-out duration-300 rounded-full">
+            Quit Game
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
