@@ -1,6 +1,6 @@
 <!-- game.component.html -->
 
-<div class="h-full max-sm:py-2 text-white relative">
+<div class="h-full max-sm:py-2 text-white font-mouseMemoirs relative">
   <div class="container mx-auto py-10 max-sm:py-2 h-full">
     <div class="header w-full flex items-center gap-10 max-sm:gap-5 justify-between">
       <div
@@ -146,6 +146,11 @@
     }"
   >
     <div class="options w-[28rem] h-[24rem] max-sm:w-[20rem] rounded-[2rem] linear-blue relative">
+      <img
+        class="result-img -mt-20 mx-auto w-48 h-32"
+        src="/assets/images/icon-pause.svg"
+        alt="Pause"
+      />
       <div class="options-buttons mt-10 flex flex-col items-center justify-center gap-6">
         <button
           (click)="resumeGame()"
