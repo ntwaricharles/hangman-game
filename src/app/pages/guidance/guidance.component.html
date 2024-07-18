@@ -1,9 +1,9 @@
-<div class="p-8 md:p-16 lg:p-20 font-primary">
+<div class="p-8 md:p-16 lg:p-20 font-mouseMemoirs">
   <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
     <div class="mx-auto col-span-1 flex justify-center md:justify-start">
       <div
         (click)="backBtn()"
-        class="bg-purpleGradient p-7 rounded-full lg:w-[94px] lg:h-[94px] shadow-2xl cursor-pointer transform transition-transform hover:scale-105"
+        class="linear-pinky p-7 rounded-full lg:w-[94px] lg:h-[94px] shadow-2xl cursor-pointer transform transition-transform hover:scale-105"
       >
         <img src="../../../../assets/images/icon-back.svg" alt="Back" class="w-full h-full" />
       </div>
@@ -18,9 +18,9 @@
       *ngFor="let guide of guidance; let i = index"
       class="bg-white rounded-3xl w-full sm:w-80 shadow-2xl p-6 text-center flex flex-col gap-6 transform transition-transform hover:scale-105"
     >
-      <h1 class="text-5xl text-blue">{{ guide.id }}</h1>
-      <h1 class="text-4xl font-bold text-darkNavy">{{ guide.title }}</h1>
-      <p class="text-purple text-lg">{{ guide.description }}</p>
+      <h1 class="text-5xl text-blue-2">{{ guide.id }}</h1>
+      <h1 class="text-4xl font-medium text-blue-3">{{ guide.title }}</h1>
+      <p class="text-purple text-lg text-purple-2">{{ guide.description }}</p>
     </div>
   </div>
 </div>
