@@ -1,3 +1,5 @@
+<!-- game.component.html -->
+
 <div class="h-full max-sm:py-2 text-white relative">
   <div class="container mx-auto py-10 max-sm:py-2 h-full">
     <div class="header w-full flex items-center gap-10 max-sm:gap-5 justify-between">
@@ -116,46 +118,52 @@
       <div class="popup-buttons mt-10 flex flex-col items-center justify-center gap-6">
         <button
           (click)="restartGame()"
-          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full bg-blue-2 shadow-lg uppercase btn-shadow"
-          [ngClass]="{
-            'block': isCompleted,
-            'hidden': !isCompleted
-          }"
+          class="popup-btn text-white text-center text-4xl max-sm:text-xl cursor-pointer"
         >
-          <div class="transition ease-in-out duration-300 rounded-full">
-            Play Again!
-          </div>
+          New Game
         </button>
-
-        <button
-          (click)="resumeGame()"
-          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full bg-blue-2 shadow-lg uppercase btn-shadow"
-          [ngClass]="{
-            'block': life > 0 && !isCompleted,
-            'hidden': life <= 0 || isCompleted
-          }"
-        >
-          <div class="transition ease-in-out duration-300 rounded-full">
-            Continue
-          </div>
-        </button>
-
         <button
           (click)="selectNewCategory()"
-          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full bg-blue-2 shadow-lg uppercase btn-shadow"
+          class="popup-btn text-white text-center text-4xl max-sm:text-xl cursor-pointer"
         >
-          <div class="transition ease-in-out duration-300 rounded-full">
-            New Category
-          </div>
+          New Category
         </button>
-
         <button
           (click)="exitGame()"
-          class="popup-btn text-white text-center text-4xl py-2 px-10 rounded-full linear-pinky shadow-lg uppercase btn-quick-shadow"
+          class="popup-btn text-white text-center text-4xl max-sm:text-xl cursor-pointer"
         >
-          <div class="transition ease-in-out duration-300 rounded-full">
-            Quit Game
-          </div>
+          Quit game
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="options-popup w-full h-full flex items-center justify-center absolute top-0 left-0 bg-black bg-opacity-40 z-10"
+    [ngClass]="{
+      'block': isOptionsPopupOpen,
+      'hidden': !isOptionsPopupOpen
+    }"
+  >
+    <div class="options w-[28rem] h-[24rem] max-sm:w-[20rem] rounded-[2rem] linear-blue relative">
+      <div class="options-buttons mt-10 flex flex-col items-center justify-center gap-6">
+        <button
+          (click)="resumeGame()"
+          class="options-btn text-white text-center text-4xl max-sm:text-xl cursor-pointer"
+        >
+          Continue
+        </button>
+        <button
+          (click)="selectNewCategory()"
+          class="options-btn text-white text-center text-4xl max-sm:text-xl cursor-pointer"
+        >
+          Select New Category
+        </button>
+        <button
+          (click)="exitGame()"
+          class="options-btn text-white text-center text-4xl max-sm:text-xl cursor-pointer"
+        >
+          Quit
         </button>
       </div>
     </div>

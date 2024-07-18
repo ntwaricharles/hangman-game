@@ -1,7 +1,9 @@
-import { CategoriesService } from '../../services/categories.service';
-import { Category, Item } from '../../model/index';
+// game.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoriesService } from '../../services/categories.service';
+import { Category } from '../../model/index';
 
 @Component({
   selector: 'app-game',
@@ -13,6 +15,7 @@ export class GameComponent implements OnInit {
   progressWidth: number = 100;
   isCompleted: boolean = false;
   isPopupOpen: boolean = false;
+  isOptionsPopupOpen: boolean = false; // Add this line
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   word: string[] = [];
   displayedWord: string[] = [];
@@ -44,7 +47,7 @@ export class GameComponent implements OnInit {
   }
 
   toggleOptions() {
-    console.log('Options toggled');
+    this.isOptionsPopupOpen = !this.isOptionsPopupOpen; // Update this line
   }
 
   loadGame() {
@@ -82,6 +85,7 @@ export class GameComponent implements OnInit {
 
   resumeGame() {
     this.isPopupOpen = false;
+    this.isOptionsPopupOpen = false; // Close options popup if it's open
   }
 
   exitGame() {
@@ -92,6 +96,7 @@ export class GameComponent implements OnInit {
   restartGame() {
     this.life = 8;
     this.isPopupOpen = false;
+    this.isOptionsPopupOpen = false; // Close options popup if it's open
     this.guessedLetters.clear();
 
     const randomItem =
