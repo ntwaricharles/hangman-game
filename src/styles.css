@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .linear-pinky {
-  background: linear-gradient(to bottom, #ff5f6d, #ffc371);
+  background: linear-gradient(to bottom, #f74cbe, #2575fc);
 }
 
 .linear-blue {
