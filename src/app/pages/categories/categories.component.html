@@ -1,0 +1,39 @@
+<div class="w-[70%] max-lg:w-[90%] mx-auto py-10 max-sm:py-2 text-white">
+  <div class="w-full flex items-center mt-5 max-sm:mt-5">
+    <button
+      class="h-24 w-24 max-sm:h-16 max-sm:w-16 rounded-full"
+      (click)="goHome()"
+    >
+      <div
+        class="w-full h-full max-sm:h-14 max-sm:w-16 flex justify-center items-start"
+      >
+        <div class="rounded-full grid place-content-center p-2 shadow-2xl z-10">
+          <img
+            class="h-full w-full"
+            src="/assets/images/icon-back.svg"
+            alt=""
+          />
+        </div>
+      </div>
+    </button>
+    <h1
+      class="text-center max-sm:text-right w-[90%] font-bold text-white text-7xl max-sm:text-5xl tracking-wide"
+    >
+      Pick a Category
+    </h1>
+  </div>
+
+  <!-- ------------------------------categories div---------------------------------- -->
+  <div
+    class="grid grid-cols-3 place-content-center gap-10 max-sm:gap-5 max-sm:mt-7 h-[65vh] max-sm:h-[72vh] max-md:grid-cols-2 max-md:mt-7 max-sm:grid-cols-1"
+  >
+    @for (key of keys; track $index) {
+
+    <a
+      class="px-5 py-10 max-sm:py-4 text-center bg-blue-2 text-5xl max-sm:text-3xl rounded-2xl hover:bg-blue-4 transition-all duration-300 btn-shadow"
+      routerLink="/categories/{{ paramKeys[$index] }}"
+      >{{ key }}</a
+    >
+    }
+  </div>
+</div>
