@@ -16,6 +16,6 @@ export class HomeComponent {
 
   goToGuidence(): void {
     console.log('Navigating to guidance...');
-    this.router.navigate(['/guidence']);
+    this.router.navigate(['/guidance']);
   }
 }
