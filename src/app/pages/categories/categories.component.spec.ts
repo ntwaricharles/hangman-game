@@ -2,8 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { CategoriesComponent } from './categories.component';
 import { CategoriesService } from '../../services/categories.service';
-import { Item } from '../../model/index';
-import { of } from 'rxjs';
 
 describe('CategoriesComponent', () => {
   let component: CategoriesComponent;
