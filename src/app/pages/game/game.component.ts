@@ -35,7 +35,6 @@ export class GameComponent implements OnInit {
     this.router.paramMap.subscribe((params) => {
       this.category = params.get('game') || '';
       if (this.category !== '') {
-        this.category = this.category.split('_').join(' ');
         this.loadGame();
       }
     });
