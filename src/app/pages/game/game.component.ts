@@ -13,7 +13,7 @@ export class GameComponent implements OnInit {
   progressWidth: number = 100;
   isCompleted: boolean = false;
   isPopupOpen: boolean = false;
-  isOptionsPopupOpen: boolean = false; // Add this line
+  isOptionsPopupOpen: boolean = false;
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   word: string[] = [];
   displayedWord: string[] = [];
@@ -105,5 +105,18 @@ export class GameComponent implements OnInit {
     this.word = randomItem.name.toUpperCase().split('');
     this.displayedWord = Array(this.word.length).fill('');
     this.progressWidth = 100;
+
+    // Automatically reveal 30% of the letters as hints
+    const hintCount = Math.ceil(this.word.length * 0.3);
+    const hintIndices = new Set<number>();
+
+    while (hintIndices.size < hintCount) {
+      hintIndices.add(Math.floor(Math.random() * this.word.length));
+    }
+
+    hintIndices.forEach((index) => {
+      this.displayedWord[index] = this.word[index];
+      this.guessedLetters.add(this.word[index]);
+    });
   }
 }

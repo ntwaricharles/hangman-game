@@ -121,9 +121,15 @@ describe('GameComponent', () => {
     expect(component.life).toBe(8);
     expect(component.isPopupOpen).toBe(false);
     expect(component.isOptionsPopupOpen).toBe(false);
-    expect(component.guessedLetters.size).toBe(0);
+
+    const hintCount = Math.ceil(component.word.length * 0.3);
+    expect(component.guessedLetters.size).toBe(hintCount);
     expect(component.word).toEqual(['T', 'E', 'S', 'T']);
-    expect(component.displayedWord).toEqual(['', '', '', '']);
     expect(component.progressWidth).toBe(100);
+
+    const nonEmptyDisplayedWordCount = component.displayedWord.filter(
+      (letter) => letter !== ''
+    ).length;
+    expect(nonEmptyDisplayedWordCount).toBe(hintCount);
   });
 });
